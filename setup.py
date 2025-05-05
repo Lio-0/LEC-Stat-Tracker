@@ -37,8 +37,7 @@ else:
     execute_query(cnx, "CREATE TABLE Players (Name VARCHAR(50) PRIMARY KEY NOT NULL,"
     + "RealName VARCHAR(50),"
     + "Role VARCHAR(10),"
-    + "Team VARCHAR(50),"
-    + "FavouriteChampion VARCHAR(20)"
+    + "Team VARCHAR(50)"
     + ");")
 
     execute_query(cnx, "CREATE TABLE Teams ("
@@ -49,7 +48,6 @@ else:
     + "Mid VARCHAR(50),"
     + "ADC VARCHAR(50),"
     + "Support VARCHAR(50),"
-    + "Winrate FLOAT NOT NULL,"
 	+ "FOREIGN KEY(Top) REFERENCES Players(Name),"
 	+ "FOREIGN KEY(Jungle) REFERENCES Players(Name),"
 	+ "FOREIGN KEY(Mid) REFERENCES Players(Name),"

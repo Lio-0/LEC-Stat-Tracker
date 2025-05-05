@@ -1,1 +1,1 @@
-#run to add initial match data to database
+"""Run script to add collected match data"""
