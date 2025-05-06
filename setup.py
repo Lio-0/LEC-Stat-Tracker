@@ -344,8 +344,8 @@ if __name__ == "__main__":
     + "REFERENCES Teams(Name);")
 
     execute_query(cnx, "CREATE PROCEDURE GetTeamWins () " \
-    "BEGIN SELECT Name AS Team, sum(Matches.WinningTeam = Name) " \
-    "AS Wins FROM Teams INNER JOIN Matches ON " \
+    "BEGIN SELECT Name, sum(Matches.WinningTeam = Name) " \
+    "FROM Teams INNER JOIN Matches ON " \
     "Teams.Name = Matches.WinningTeam GROUP BY Name; END")
 
     cnx.close()

@@ -2,10 +2,6 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from setup import create_connection
 
-cnx = create_connection(True)
-current_sort_order = {}  # Keeps track of sort direction per column
-current_table = ""       # Keeps track of the currently displayed table
-
 def run_query(query):
     global current_columns
     try:
@@ -26,7 +22,6 @@ def run_query(query):
 
         for row in results:
             tree.insert("", "end", values=row)
-
     except Exception as e:
         messagebox.showerror("Query Error", str(e))
 
@@ -50,6 +45,10 @@ def show_table(table_name):
     run_query(f"SELECT * FROM {table_name}")
 
 if __name__ == "__main__":
+    cnx = create_connection(True)
+    current_sort_order = {}  # Keeps track of sort direction per column
+    current_table = ""       # Keeps track of the currently displayed table
+
     root = tk.Tk()
     root.title("MySQL Viewer")
 
@@ -58,9 +57,9 @@ if __name__ == "__main__":
 
     # Buttons for loading tables
     tk.Button(frame, text="Show All Matches", command=lambda: show_table("Matches")).pack(fill='x', pady=2)
+    tk.Button(frame, text="Show All Teams", command=lambda: show_table("Teams")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Players", command=lambda: show_table("Players")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Champions", command=lambda: show_table("Champions")).pack(fill='x', pady=2)
-    tk.Button(frame, text="Show Leaderboard", command=lambda: run_query("CALL GetTeamWins")).pack(fill='x', pady=2)
 
     # Treeview for displaying results
     tree = ttk.Treeview(root)
