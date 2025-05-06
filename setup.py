@@ -19,12 +19,12 @@ def create_connection(connect_db):
     try:
         if connect_db:
             connection = mysql.connector.connect(user='root',
-                                                 password='Liooil10!',
+                                                 password='tintin2014',
                                                  host='localhost',
                                                  database="LEC_STATS")
         else:
             connection = mysql.connector.connect(user='root',
-                                                 password='Liooil10!',
+                                                 password='tintin2014',
                                                  host='localhost')
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
