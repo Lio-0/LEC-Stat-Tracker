@@ -54,3 +54,4 @@ if __name__ == "__main__":
             + "(43, 'GIANTX', 'Jax', 'Maokai', 'Viktor', 'Ezreal', 'Rell', 'SK Gaming', 'Jayce', 'Xin Zhao', 'Galio', 'Jinx', 'Braum', 'GIANTX'),"
             + "(44, 'Team Vitality', 'Jax', 'Ivern', 'Taliyah', 'Corki', 'Alistar', 'Team BDS', 'Renekton', 'Sejuani', 'Azir', 'Miss Fortune', 'Rell', 'Team Vitality'),"
             + "(45, 'Team Heretics', 'K\\'Sante', 'Sejuani', 'Viktor', 'Zeri', 'Rell', 'Rogue', 'Garen', 'Maokai', 'Orianna', 'Varus', 'Alistar', 'Rogue')"))
+
