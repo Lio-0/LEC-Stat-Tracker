@@ -3,7 +3,6 @@ import tkinter as tk
 from tkinter import messagebox
 from setup import create_connection
 
-# Use your custom connection function
 cnx = create_connection(True)
 
 # Function to execute a query and show results in the text area
