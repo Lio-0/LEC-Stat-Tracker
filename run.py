@@ -23,20 +23,23 @@ def run_query(query):
     except Exception as e:
         messagebox.showerror("Query Error", str(e))
 
-# GUI setup
-root = tk.Tk()
-root.title("MySQL Viewer")
 
-frame = tk.Frame(root)
-frame.pack(padx=10, pady=10)
+if __name__ == "__main__":
+        
+    # GUI setup
+    root = tk.Tk()
+    root.title("MySQL Viewer")
 
-# Add buttons with custom queries
-tk.Button(frame, text="Show All Matches", command=lambda: run_query("SELECT * FROM Matches")).pack(fill='x', pady=2)
+    frame = tk.Frame(root)
+    frame.pack(padx=10, pady=10)
 
-# Text box to display query results
-result_text = tk.Text(root, wrap='none', height=20, width=80)
-result_text.pack(padx=10, pady=10)
+    # Add buttons with custom queries
+    tk.Button(frame, text="Show All Matches", command=lambda: run_query("SELECT * FROM Matches")).pack(fill='x', pady=2)
 
-root.mainloop()
+    # Text box to display query results
+    result_text = tk.Text(root, wrap='none', height=20, width=80)
+    result_text.pack(padx=10, pady=10)
 
-cnx = create_connection(True)
+    root.mainloop()
+
+    cnx = create_connection(True)
