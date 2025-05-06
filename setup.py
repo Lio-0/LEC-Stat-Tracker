@@ -19,12 +19,12 @@ def create_connection(connect_db):
     try:
         if connect_db:
             connection = mysql.connector.connect(user='root',
-                                                 password='tintin2014',
+                                                 password='Liooil10!',
                                                  host='localhost',
                                                  database="LEC_STATS")
         else:
             connection = mysql.connector.connect(user='root',
-                                                 password='tintin2014',
+                                                 password='Liooil10!',
                                                  host='localhost')
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -339,8 +339,13 @@ if __name__ == "__main__":
     + "('Team Vitality', 'James MacCormack', 'Naak Nako', 'Lyncas', 'Czajek', 'Carzzy', 'Hylissang')")
 
     execute_query(cnx, "ALTER TABLE Players "
-        + "ADD CONSTRAINT fk1 "
-        + "FOREIGN KEY (Team) "
-        + "REFERENCES Teams(Name);")
+    + "ADD CONSTRAINT fk1 "
+    + "FOREIGN KEY (Team) "
+    + "REFERENCES Teams(Name);")
+
+    execute_query(cnx, "CREATE PROCEDURE GetTeamWins () " \
+    "BEGIN SELECT Name AS Team, sum(Matches.WinningTeam = Name) " \
+    "AS Wins FROM Teams INNER JOIN Matches ON " \
+    "Teams.Name = Matches.WinningTeam GROUP BY Name; END")
 
     cnx.close()

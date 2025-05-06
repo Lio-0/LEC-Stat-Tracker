@@ -60,6 +60,7 @@ if __name__ == "__main__":
     tk.Button(frame, text="Show All Matches", command=lambda: show_table("Matches")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Players", command=lambda: show_table("Players")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Champions", command=lambda: show_table("Champions")).pack(fill='x', pady=2)
+    tk.Button(frame, text="Show Leaderboard", command=lambda: run_query("CALL GetTeamWins")).pack(fill='x', pady=2)
 
     # Treeview for displaying results
     tree = ttk.Treeview(root)
