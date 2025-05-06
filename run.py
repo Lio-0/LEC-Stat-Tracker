@@ -15,7 +15,7 @@ def run_query(query):
 
         # Clear the output box and display column headers
         result_text.delete("1.0", tk.END)
-        result_text.insert(tk.END, "\t".join(columns) + "\n" + "-"*50 + "\n")
+        result_text.insert(tk.END, "\t".join(columns) + "\n" + "-"*80 + "\n")
         for row in results:
             result_text.insert(tk.END, "\t".join(str(cell) for cell in row) + "\n")
 
