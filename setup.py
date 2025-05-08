@@ -19,12 +19,12 @@ def create_connection(connect_db):
     try:
         if connect_db:
             connection = mysql.connector.connect(user='root',
-                                                 password='tintin2014',
+                                                 password='Liooil10!',
                                                  host='localhost',
                                                  database="LEC_STATS")
         else:
             connection = mysql.connector.connect(user='root',
-                                                 password='tintin2014',
+                                                 password='Liooil10!',
                                                  host='localhost')
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -339,25 +339,66 @@ if __name__ == "__main__":
     + "('Team Vitality', 'James MacCormack', 'Naak Nako', 'Lyncas', 'Czajek', 'Carzzy', 'Hylissang')")
 
     execute_query(cnx, "ALTER TABLE Players "
-    + "ADD CONSTRAINT fk1 "
-    + "FOREIGN KEY (Team) "
-    + "REFERENCES Teams(Name);")
+        + "ADD CONSTRAINT fk1 "
+        + "FOREIGN KEY (Team) "
+        + "REFERENCES Teams(Name);")
 
+    execute_query(cnx, "" \
+        "CREATE VIEW TeamStatistics AS " \
+        "SELECT t.Name AS TeamName, " \
+        "COUNT(m.MatchID) AS TotalGames, " \
+        "SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) AS Wins, " \
+        "ROUND(SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) / COUNT(m.MatchID) * 100, 2) " \
+        "AS WinratePercent FROM Teams t " \
+        "LEFT JOIN Matches m ON t.Name = m.RedSideTeam OR t.Name = m.BlueSideTeam " \
+        "GROUP BY t.Name;")
+
+
+    #Functions and Procedures
     execute_query(cnx, "CREATE PROCEDURE GetTeamWins () " \
-    "BEGIN SELECT Name, sum(Matches.WinningTeam = Name) " \
-    "FROM Teams INNER JOIN Matches ON " \
-    "Teams.Name = Matches.WinningTeam GROUP BY Name; END")
+        "BEGIN SELECT Name AS Team, sum(Matches.WinningTeam = Name) " \
+        "AS Wins, GetTeamWinrate(Name) AS 'Win Rate' FROM Teams INNER " \
+        "JOIN Matches ON Teams.Name = Matches.WinningTeam GROUP BY Name;" \
+        "END")
 
-    execute_query(cnx, """
-    CREATE VIEW TeamStatistics AS
-    SELECT
-        t.Name AS TeamName,
-        COUNT(m.MatchID) AS TotalGames,
-        SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) AS Wins,
-        ROUND(SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) / COUNT(m.MatchID) * 100, 2) AS WinratePercent
-    FROM Teams t
-    LEFT JOIN Matches m ON t.Name = m.RedSideTeam OR t.Name = m.BlueSideTeam
-    GROUP BY t.Name;
-    """)
-    
+    execute_query(cnx, "" \
+        "CREATE PROCEDURE InsertMatch (IN RTeam VARCHAR(50), RTop VARCHAR(50), RJgl VARCHAR(50), " \
+        "RMid VARCHAR(50), RAdc VARCHAR(50), RSup VARCHAR(50), BTeam VARCHAR(50), BTop VARCHAR(50), " \
+        "BJgl VARCHAR(50), BMid VARCHAR(50), BAdc VARCHAR(50), BSup VARCHAR(50), WTeam VARCHAR(50)) " \
+        "BEGIN " \
+        "INSERT INTO Matches(RedSideTeam, RedSideTop, RedSideJgl, RedSideMid, " \
+        "RedSideAdc, RedSideSup, BlueSideTeam, BlueSideTop, BlueSideJgl, BlueSideMid, " \
+        "BlueSideAdc, BlueSideSup, WinningTeam) " \
+        "VALUES (RTeam, RTop, RJgl, RMid, RAdc, RSup, BTeam, BTop, BJgl, BMid, BAdc, BSup, WTeam);" \
+        "END")
+
+    execute_query(cnx, "" \
+        "CREATE FUNCTION GetTeamWinrate (team VARCHAR(50)) " \
+        "RETURNS float " \
+        "DETERMINISTIC " \
+        "BEGIN " \
+        "DECLARE wins INT; " \
+        "DECLARE played INT; " \
+        "SELECT sum(WinningTeam = team) FROM Matches INTO wins; " \
+        "SELECT sum(RedSideTeam = team OR BlueSideTeam = team) FROM Matches INTO played; " \
+        "RETURN round(wins / played * 100, 2); " \
+        "END")
+
+    execute_query(cnx, "" \
+        "CREATE FUNCTION GetChampionWinrate (champ VARCHAR(50)) " \
+        "RETURNS float " \
+        "DETERMINISTIC " \
+        "BEGIN " \
+        "DECLARE redWins INT; " \
+        "DECLARE blueWins INT; " \
+        "DECLARE played INT; " \
+        "SELECT sum(RedSideTop = champ OR RedSideJgl = champ OR RedSideMid = champ OR " \
+        "RedSideAdc = champ OR RedSideSup = champ) FROM Matches WHERE RedSideTeam = WinningTeam INTO redWins; " \
+        "SELECT sum(BlueSideTop = champ OR BlueSideJgl = champ OR BlueSideMid = champ OR " \
+        "BlueSideAdc = champ OR BlueSideSup = champ) FROM Matches WHERE BlueSideTeam = WinningTeam INTO BlueWins; " \
+        "SELECT sum(BlueSideTop = champ OR BlueSideJgl = champ OR BlueSideMid = champ OR " \
+        "BlueSideAdc = champ OR BlueSideSup = champ OR RedSideTop = champ OR " \
+        "RedSideJgl = champ OR RedSideMid = champ OR RedSideAdc = champ OR RedSideSup = champ) FROM Matches INTO played; " \
+        "RETURN round((redWins + blueWins) / played * 100, 2); " \
+        "END")
     cnx.close()

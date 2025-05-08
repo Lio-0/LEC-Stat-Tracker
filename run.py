@@ -1,8 +1,13 @@
+"""Main script for data viewer"""
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 from setup import create_connection
 
+
 def run_query(query):
+    """Runs string as SQL query"""
+
     global current_columns
     try:
         cursor = cnx.cursor()
