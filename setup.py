@@ -19,12 +19,12 @@ def create_connection(connect_db):
     try:
         if connect_db:
             connection = mysql.connector.connect(user='root',
-                                                 password='Liooil10!',
+                                                 password='tintin2014',
                                                  host='localhost',
                                                  database="LEC_STATS")
         else:
             connection = mysql.connector.connect(user='root',
-                                                 password='Liooil10!',
+                                                 password='tintin2014',
                                                  host='localhost')
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     +");")
 
     execute_query(cnx, "CREATE TABLE Matches ("
-    + "MatchID INT PRIMARY KEY NOT NULL,"
+    + "MatchID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,"
     + "RedSideTeam VARCHAR(50),"
     + "RedSideTop VARCHAR(50),"
     + "RedSideJgl VARCHAR(50),"
@@ -348,4 +348,16 @@ if __name__ == "__main__":
     "FROM Teams INNER JOIN Matches ON " \
     "Teams.Name = Matches.WinningTeam GROUP BY Name; END")
 
+    execute_query(cnx, """
+    CREATE VIEW TeamStatistics AS
+    SELECT
+        t.Name AS TeamName,
+        COUNT(m.MatchID) AS TotalGames,
+        SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) AS Wins,
+        ROUND(SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) / COUNT(m.MatchID) * 100, 2) AS WinratePercent
+    FROM Teams t
+    LEFT JOIN Matches m ON t.Name = m.RedSideTeam OR t.Name = m.BlueSideTeam
+    GROUP BY t.Name;
+    """)
+    
     cnx.close()
