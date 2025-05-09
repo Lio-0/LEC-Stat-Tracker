@@ -49,6 +49,39 @@ def show_table(table_name):
     current_table = table_name
     run_query(f"SELECT * FROM {table_name}")
 
+def open_add_match_window():
+    window = tk.Toplevel(root)
+    window.title("Add New Match")
+
+    fields = [
+        "RedSideTeam", "RedTop", "RedJgl", "RedMid", "RedAdc", "RedSup",
+        "BlueSideTeam", "BlueTop", "BlueJgl", "BlueMid", "BlueAdc", "BlueSup",
+        "WinningTeam"
+    ]
+
+    entries = {}
+
+    for i, field in enumerate(fields):
+        tk.Label(window, text=field).grid(row=i, column=0, sticky='e', padx=5, pady=2)
+        entry = tk.Entry(window)
+        entry.grid(row=i, column=1, padx=5, pady=2)
+        entries[field] = entry
+
+    def submit_match():
+        values = [entries[f].get() for f in fields]
+        try:
+            cursor = cnx.cursor()
+            cursor.callproc("InsertMatch", values)
+            cnx.commit()
+            messagebox.showinfo("Success", "Match inserted successfully!")
+            window.destroy()
+            if current_table == "Matches":
+                run_query(f"SELECT * FROM Matches")
+        except Exception as e:
+            messagebox.showerror("Insert Error", str(e))
+
+    tk.Button(window, text="Submit", command=submit_match).grid(row=len(fields), columnspan=2, pady=10)
+
 if __name__ == "__main__":
     cnx = create_connection(True)
     current_sort_order = {}  # Keeps track of sort direction per column
@@ -61,6 +94,7 @@ if __name__ == "__main__":
     frame.pack(padx=10, pady=10)
 
     # Buttons for loading tables
+    tk.Button(frame, text="Add Match", command=lambda: open_add_match_window()).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Matches", command=lambda: show_table("Matches")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Teams", command=lambda: show_table("Teams")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Players", command=lambda: show_table("Players")).pack(fill='x', pady=2)

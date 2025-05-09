@@ -400,7 +400,7 @@ if __name__ == "__main__":
         "BlueSideAdc = champ OR BlueSideSup = champ) FROM Matches WHERE BlueSideTeam = WinningTeam INTO BlueWins; " \
         "SELECT GetChampionGamesPlayed(champ) INTO played; " \
         "IF played = 0 THEN RETURN 0; END IF; " \
-        "RETURN ROUND(redWins + blueWins / played * 100, 2); " \
+        "RETURN ROUND((redWins + blueWins) / played * 100, 2); " \
         "END")
     
     execute_query(cnx, "" \
