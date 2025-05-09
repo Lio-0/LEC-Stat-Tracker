@@ -278,52 +278,52 @@ if __name__ == "__main__":
     + "('Oscarinin', 'Óscar Muñoz Jiménez', 'Top', 'Fnatic'),"
     + "('Razork', 'Iván Martín Díaz', 'Jungle', 'Fnatic'),"
     + "('Humanoid', 'Marek Brázda', 'Mid', 'Fnatic'),"
-    + "('Upset', 'Elias Lipp', 'Bot', 'Fnatic'),"
+    + "('Upset', 'Elias Lipp', 'Adc', 'Fnatic'),"
     + "('Mikyx', 'Mihael Mehle', 'Support', 'Fnatic'),"
     + "('BrokenBlade', 'Sergen Çelik', 'Top', 'G2 Esports'),"
     + "('SkewMond', 'Rudy Semaan', 'Jungle', 'G2 Esports'),"
     + "('Caps', 'Rasmus Winther', 'Mid', 'G2 Esports'),"
-    + "('Hans Sama', 'Steven Liv', 'Bot', 'G2 Esports'),"
+    + "('Hans Sama', 'Steven Liv', 'Adc', 'G2 Esports'),"
     + "('Labrov', 'Labros Papoutsakis', 'Support', 'G2 Esports'),"
     + "('Lot', 'Eren Yıldız', 'Top', 'GIANTX'),"
     + "('Closer', 'Can Çelik', 'Jungle', 'GIANTX'),"
     + "('Jackies', 'Adam Jeřábek', 'Mid', 'GIANTX'),"
-    + "('Noah', 'Oh Hyeon-taek', 'Bot', 'GIANTX'),"
+    + "('Noah', 'Oh Hyeon-taek', 'Adc', 'GIANTX'),"
     + "('Jun', 'Yoon Se-jun', 'Support', 'GIANTX'),"
     + "('Canna', 'Kim Chang-dong', 'Top', 'Karmine Corp'),"
     + "('Yike', 'Martin Sundelin', 'Jungle', 'Karmine Corp'),"
     + "('Vladi', 'Vladimiros Kourtidis', 'Mid', 'Karmine Corp'),"
-    + "('Caliste', 'Caliste Henry-Hennebert', 'Bot', 'Karmine Corp'),"
+    + "('Caliste', 'Caliste Henry-Hennebert', 'Adc', 'Karmine Corp'),"
     + "('Targamas', 'Raphaël Crabbé', 'Support', 'Karmine Corp'),"
     + "('Myrwn', 'Alex Villarejo', 'Top', 'Movistar KOI'),"
     + "('Elyoya', 'Javier Prades Batalla', 'Jungle', 'Movistar KOI'),"
     + "('Jojopyun', 'Joseph Joon Pyun', 'Mid', 'Movistar KOI'),"
-    + "('Supa', 'David Martínez García', 'Bot', 'Movistar KOI'),"
+    + "('Supa', 'David Martínez García', 'Adc', 'Movistar KOI'),"
     + "('Alvaro', 'Álvaro Fernández del Amo', 'Support', 'Movistar KOI'),"
     + "('Adam', 'Adam Maanane', 'Top', 'Rogue'),"
     + "('Malrang', 'Kim Geun-seong', 'Jungle', 'Rogue'),"
     + "('Larssen', 'Emil Larsson', 'Mid', 'Rogue'),"
-    + "('Patrik', 'Patrik Jírů', 'Bot', 'Rogue'),"
+    + "('Patrik', 'Patrik Jírů', 'Adc', 'Rogue'),"
     + "('Execute', 'Lee Jeong-hoon', 'Support', 'Rogue'),"
     + "('JNX', 'Janik Bartels', 'Top', 'SK Gaming'),"
     + "('Isma', 'Ismaïl Boualem', 'Jungle', 'SK Gaming'),"
     + "('Reeker', 'Steven Chen', 'Mid', 'SK Gaming'),"
-    + "('Rahel', 'Cho Min-seong', 'Bot', 'SK Gaming'),"
+    + "('Rahel', 'Cho Min-seong', 'Adc', 'SK Gaming'),"
     + "('Loopy', 'Kim Dong-hyeon', 'Support', 'SK Gaming'),"
     + "('Irrelevant', 'Joel Miro Scharoll', 'Top', 'Team BDS'),"
     + "('113', 'Doğukan Balcı', 'Jungle', 'Team BDS'),"
     + "('Nuc', 'Ilias Bizriken', 'Mid', 'Team BDS'),"
-    + "('Ice', 'Yoon Sang-hoon', 'Bot', 'Team BDS'),"
+    + "('Ice', 'Yoon Sang-hoon', 'Adc', 'Team BDS'),"
     + "('Parus', 'Polat Furkan Çiçek', 'Support', 'Team BDS'),"
     + "('Carlsen', 'Carl Ulsted Carlsen', 'Top', 'Team Heretics'),"
     + "('Sheo', 'Théo Borile', 'Jungle', 'Team Heretics'),"
     + "('Kamiloo', 'Kamil Haudegond', 'Mid', 'Team Heretics'),"
-    + "('Flakked', 'Victor Lirola Tortosa', 'Bot', 'Team Heretics'),"
+    + "('Flakked', 'Victor Lirola Tortosa', 'Adc', 'Team Heretics'),"
     + "('Stend', 'Paul Lardin', 'Support', 'Team Heretics'),"
     + "('Naak Nako', 'Kaan Okan', 'Top', 'Team Vitality'),"
     + "('Lyncas', 'Linas Nauncikas', 'Jungle', 'Team Vitality'),"
     + "('Czajek', 'Mateusz Czajka', 'Mid', 'Team Vitality'),"
-    + "('Carzzy', 'Matyáš Orság', 'Bot', 'Team Vitality'),"
+    + "('Carzzy', 'Matyáš Orság', 'Adc', 'Team Vitality'),"
     + "('Hylissang', 'Zdravets Galabov', 'Support', 'Team Vitality')")
 
     execute_query(cnx, "INSERT INTO Teams(Name, Coach, Top, Jungle, Mid, ADC, Support) VALUES"
@@ -418,7 +418,6 @@ if __name__ == "__main__":
         "RETURN ROUND(blueWins / totalGames * 100, 2); " \
         "END")
     
-    
     #views
 
     execute_query(cnx, "" \
@@ -445,9 +444,59 @@ if __name__ == "__main__":
         "GetSideWinrate('Red') AS RedSideWinRate, " \
         "GetSideWinrate('Blue') AS BlueSideWinRate; " \
         )
-    
-    
-
+        
+    execute_query(cnx, "" \
+        "CREATE FUNCTION GetFavouriteChamp (player VARCHAR(50)) " \
+        "RETURNS VARCHAR(50) " \
+        "DETERMINISTIC " \
+        "BEGIN " \
+	    "DECLARE favourite VARCHAR(50); " \
+        "DECLARE prole VARCHAR(10); " \
+        "DECLARE pteam VARCHAR(50); " \
+	    "SELECT Team FROM Players WHERE (player = Players.Name) INTO pteam; " \
+        "SELECT Role FROM Players WHERE (player = Players.Name) INTO prole; " \
+        "IF (prole LIKE 'Top') THEN " \
+		"SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM " \
+		"(SELECT Matches.RedSideTop AS Name FROM Matches " \
+		"WHERE Matches.RedSideTeam = pteam UNION ALL " \
+		"SELECT Matches.BlueSideTop AS Name FROM Matches " \
+		"WHERE Matches.BlueSideTeam = pteam) AS champs1 GROUP BY Name " \
+		"ORDER BY count DESC LIMIT 1) AS TOP INTO favourite; " \
+	    "END IF; " \
+        "IF (prole LIKE 'Jungle') THEN " \
+		"SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM " \
+		"(SELECT Matches.RedSideJgl AS Name FROM Matches " \
+		"WHERE Matches.RedSideTeam = pteam UNION ALL " \
+		"SELECT Matches.BlueSideJgl AS Name FROM Matches " \
+		"WHERE Matches.BlueSideTeam = pteam) AS champs2 GROUP BY Name " \
+		"ORDER BY count DESC LIMIT 1) AS JGL INTO favourite; " \
+	    "END IF; " \
+	    "IF (prole LIKE 'Mid') THEN " \
+		"SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM " \
+		"(SELECT Matches.RedSideMid AS Name FROM Matches " \
+		"WHERE Matches.RedSideTeam = pteam UNION ALL " \
+		"SELECT Matches.BlueSideMid AS Name FROM Matches " \
+		"WHERE Matches.BlueSideTeam = pteam) AS champs3 GROUP BY Name " \
+		"ORDER BY count DESC LIMIT 1) AS MID INTO favourite; " \
+	    "END IF; " \
+        "IF (prole LIKE 'Adc') THEN " \
+		"SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM " \
+		"(SELECT Matches.RedSideAdc AS Name FROM Matches " \
+		"WHERE Matches.RedSideTeam = pteam UNION ALL " \
+		"SELECT Matches.BlueSideAdc AS Name FROM Matches " \
+		"WHERE Matches.BlueSideTeam = pteam) AS champs4 GROUP BY Name " \
+		"ORDER BY count DESC LIMIT 1) AS ADC INTO favourite; " \
+	    "END IF; " \
+        "IF (prole LIKE 'Support') THEN " \
+		"SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM " \
+		"(SELECT Matches.RedSideSup AS Name FROM Matches " \
+		"WHERE Matches.RedSideTeam = pteam UNION ALL " \
+		"SELECT Matches.BlueSideSup AS Name FROM Matches " \
+		"WHERE Matches.BlueSideTeam = pteam) AS champs5 GROUP BY Name " \
+		"ORDER BY count DESC LIMIT 1) AS SUP INTO favourite; " \
+	    "END IF;" \
+	    "RETURN favourite;" \
+        "END")
 
     cnx.close()
 
