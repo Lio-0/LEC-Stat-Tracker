@@ -19,12 +19,12 @@ def create_connection(connect_db):
     try:
         if connect_db:
             connection = mysql.connector.connect(user='root',
-                                                 password='Liooil10!',
+                                                 password='tintin2014',
                                                  host='localhost',
                                                  database="LEC_STATS")
         else:
             connection = mysql.connector.connect(user='root',
-                                                 password='Liooil10!',
+                                                 password='tintin2014',
                                                  host='localhost')
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -343,16 +343,6 @@ if __name__ == "__main__":
         + "FOREIGN KEY (Team) "
         + "REFERENCES Teams(Name);")
 
-    execute_query(cnx, "" \
-        "CREATE VIEW TeamStatistics AS " \
-        "SELECT t.Name AS TeamName, " \
-        "COUNT(m.MatchID) AS TotalGames, " \
-        "SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) AS Wins, " \
-        "ROUND(SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) / COUNT(m.MatchID) * 100, 2) " \
-        "AS WinratePercent FROM Teams t " \
-        "LEFT JOIN Matches m ON t.Name = m.RedSideTeam OR t.Name = m.BlueSideTeam " \
-        "GROUP BY t.Name;")
-
 
     #Functions and Procedures
     execute_query(cnx, "CREATE PROCEDURE GetTeamWins () " \
@@ -385,6 +375,18 @@ if __name__ == "__main__":
         "END")
 
     execute_query(cnx, "" \
+        "CREATE FUNCTION GetChampionGamesPlayed (champ VARCHAR(50)) " \
+        "RETURNS INT " \
+        "DETERMINISTIC  " \
+        "BEGIN " \
+        "DECLARE played INT; " \
+        "SELECT sum(BlueSideTop = champ OR BlueSideJgl = champ OR BlueSideMid = champ OR " \
+        "BlueSideAdc = champ OR BlueSideSup = champ OR RedSideTop = champ OR " \
+        "RedSideJgl = champ OR RedSideMid = champ OR RedSideAdc = champ OR RedSideSup = champ) FROM Matches INTO played; " \
+        "RETURN played; " \
+        "END")
+
+    execute_query(cnx, "" \
         "CREATE FUNCTION GetChampionWinrate (champ VARCHAR(50)) " \
         "RETURNS float " \
         "DETERMINISTIC " \
@@ -396,9 +398,28 @@ if __name__ == "__main__":
         "RedSideAdc = champ OR RedSideSup = champ) FROM Matches WHERE RedSideTeam = WinningTeam INTO redWins; " \
         "SELECT sum(BlueSideTop = champ OR BlueSideJgl = champ OR BlueSideMid = champ OR " \
         "BlueSideAdc = champ OR BlueSideSup = champ) FROM Matches WHERE BlueSideTeam = WinningTeam INTO BlueWins; " \
-        "SELECT sum(BlueSideTop = champ OR BlueSideJgl = champ OR BlueSideMid = champ OR " \
-        "BlueSideAdc = champ OR BlueSideSup = champ OR RedSideTop = champ OR " \
-        "RedSideJgl = champ OR RedSideMid = champ OR RedSideAdc = champ OR RedSideSup = champ) FROM Matches INTO played; " \
-        "RETURN round((redWins + blueWins) / played * 100, 2); " \
+        "SELECT GetChampionGamesPlayed(champ) INTO played; " \
+        "IF played = 0 THEN RETURN 0; END IF; " \
+        "RETURN ROUND(redWins + blueWins / played * 100, 2); " \
         "END")
+    
+    execute_query(cnx, "" \
+        "CREATE VIEW TeamStatistics AS " \
+        "SELECT t.Name AS TeamName, " \
+        "COUNT(m.MatchID) AS TotalGames, " \
+        "SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) AS Wins, " \
+        "ROUND(GetTeamWinrate(t.Name)) AS WinratePercent " \
+        "FROM Teams t " \
+        "LEFT JOIN Matches m ON t.Name = m.RedSideTeam OR t.Name = m.BlueSideTeam " \
+        "GROUP BY t.Name;")
+
+    execute_query(cnx, ""\
+        "CREATE VIEW ChampionStatistics AS " \
+        "SELECT c.Name AS ChampionName, " \
+        "GetChampionGamesPlayed(c.Name) AS GamesPicked, " \
+        "GetChampionWinrate(c.Name) AS WinRate " \
+        "FROM Champions c " \
+        "GROUP BY c.Name;")
+    
     cnx.close()
+
