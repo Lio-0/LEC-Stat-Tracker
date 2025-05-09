@@ -404,6 +404,24 @@ if __name__ == "__main__":
         "END")
     
     execute_query(cnx, "" \
+        "CREATE FUNCTION GetSideWinrate (side VARCHAR(50))" \
+        "RETURNS float " \
+        "DETERMINISTIC " \
+        "BEGIN " \
+        "DECLARE redWins INT; " \
+        "DECLARE blueWins INT; " \
+        "DECLARE totalGames INT; " \
+        "SELECT COUNT(*) FROM Matches INTO totalGames; " \
+        "SELECT COUNT(*) FROM Matches WHERE RedSideTeam = WinningTeam INTO redWins; " \
+        "SELECT COUNT(*) FROM Matches WHERE BlueSideTeam = WinningTeam INTO blueWins; " \
+        "IF side = 'Red' THEN RETURN ROUND(redWins / totalGames * 100, 2); END IF; " \
+        "RETURN ROUND(blueWins / totalGames * 100, 2); " \
+        "END")
+    
+    
+    #views
+
+    execute_query(cnx, "" \
         "CREATE VIEW TeamStatistics AS " \
         "SELECT t.Name AS TeamName, " \
         "COUNT(m.MatchID) AS TotalGames, " \
@@ -421,5 +439,15 @@ if __name__ == "__main__":
         "FROM Champions c " \
         "GROUP BY c.Name;")
     
+    execute_query(cnx, "" \
+        "CREATE VIEW SideStatistics AS " \
+        "SELECT " \
+        "GetSideWinrate('Red') AS RedSideWinRate, " \
+        "GetSideWinrate('Blue') AS BlueSideWinRate; " \
+        )
+    
+    
+
+
     cnx.close()
 
