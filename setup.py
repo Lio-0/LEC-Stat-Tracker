@@ -50,8 +50,7 @@ if __name__ == "__main__":
 
     execute_query(cnx, "CREATE TABLE Players (Name VARCHAR(50) PRIMARY KEY NOT NULL,"
     + "RealName VARCHAR(50),"
-    + "Role VARCHAR(10),"
-    + "Team VARCHAR(50)"
+    + "Role VARCHAR(10)"
     + ");")
 
     execute_query(cnx, "CREATE TABLE Teams ("
@@ -278,57 +277,57 @@ if __name__ == "__main__":
         + "('Zoe', '2017-11-21'),"
         + "('Zyra', '2012-07-24');")
 
-    execute_query(cnx, "INSERT INTO Players(Name, RealName, Role, Team) VALUES "
-    + "('Oscarinin', 'Óscar Muñoz Jiménez', 'Top', 'Fnatic'),"
-    + "('Razork', 'Iván Martín Díaz', 'Jungle', 'Fnatic'),"
-    + "('Humanoid', 'Marek Brázda', 'Mid', 'Fnatic'),"
-    + "('Upset', 'Elias Lipp', 'Adc', 'Fnatic'),"
-    + "('Mikyx', 'Mihael Mehle', 'Support', 'Fnatic'),"
-    + "('BrokenBlade', 'Sergen Çelik', 'Top', 'G2 Esports'),"
-    + "('SkewMond', 'Rudy Semaan', 'Jungle', 'G2 Esports'),"
-    + "('Caps', 'Rasmus Winther', 'Mid', 'G2 Esports'),"
-    + "('Hans Sama', 'Steven Liv', 'Adc', 'G2 Esports'),"
-    + "('Labrov', 'Labros Papoutsakis', 'Support', 'G2 Esports'),"
-    + "('Lot', 'Eren Yıldız', 'Top', 'GIANTX'),"
-    + "('Closer', 'Can Çelik', 'Jungle', 'GIANTX'),"
-    + "('Jackies', 'Adam Jeřábek', 'Mid', 'GIANTX'),"
-    + "('Noah', 'Oh Hyeon-taek', 'Adc', 'GIANTX'),"
-    + "('Jun', 'Yoon Se-jun', 'Support', 'GIANTX'),"
-    + "('Canna', 'Kim Chang-dong', 'Top', 'Karmine Corp'),"
-    + "('Yike', 'Martin Sundelin', 'Jungle', 'Karmine Corp'),"
-    + "('Vladi', 'Vladimiros Kourtidis', 'Mid', 'Karmine Corp'),"
-    + "('Caliste', 'Caliste Henry-Hennebert', 'Adc', 'Karmine Corp'),"
-    + "('Targamas', 'Raphaël Crabbé', 'Support', 'Karmine Corp'),"
-    + "('Myrwn', 'Alex Villarejo', 'Top', 'Movistar KOI'),"
-    + "('Elyoya', 'Javier Prades Batalla', 'Jungle', 'Movistar KOI'),"
-    + "('Jojopyun', 'Joseph Joon Pyun', 'Mid', 'Movistar KOI'),"
-    + "('Supa', 'David Martínez García', 'Adc', 'Movistar KOI'),"
-    + "('Alvaro', 'Álvaro Fernández del Amo', 'Support', 'Movistar KOI'),"
-    + "('Adam', 'Adam Maanane', 'Top', 'Rogue'),"
-    + "('Malrang', 'Kim Geun-seong', 'Jungle', 'Rogue'),"
-    + "('Larssen', 'Emil Larsson', 'Mid', 'Rogue'),"
-    + "('Patrik', 'Patrik Jírů', 'Adc', 'Rogue'),"
-    + "('Execute', 'Lee Jeong-hoon', 'Support', 'Rogue'),"
-    + "('JNX', 'Janik Bartels', 'Top', 'SK Gaming'),"
-    + "('Isma', 'Ismaïl Boualem', 'Jungle', 'SK Gaming'),"
-    + "('Reeker', 'Steven Chen', 'Mid', 'SK Gaming'),"
-    + "('Rahel', 'Cho Min-seong', 'Adc', 'SK Gaming'),"
-    + "('Loopy', 'Kim Dong-hyeon', 'Support', 'SK Gaming'),"
-    + "('Irrelevant', 'Joel Miro Scharoll', 'Top', 'Team BDS'),"
-    + "('113', 'Doğukan Balcı', 'Jungle', 'Team BDS'),"
-    + "('Nuc', 'Ilias Bizriken', 'Mid', 'Team BDS'),"
-    + "('Ice', 'Yoon Sang-hoon', 'Adc', 'Team BDS'),"
-    + "('Parus', 'Polat Furkan Çiçek', 'Support', 'Team BDS'),"
-    + "('Carlsen', 'Carl Ulsted Carlsen', 'Top', 'Team Heretics'),"
-    + "('Sheo', 'Théo Borile', 'Jungle', 'Team Heretics'),"
-    + "('Kamiloo', 'Kamil Haudegond', 'Mid', 'Team Heretics'),"
-    + "('Flakked', 'Victor Lirola Tortosa', 'Adc', 'Team Heretics'),"
-    + "('Stend', 'Paul Lardin', 'Support', 'Team Heretics'),"
-    + "('Naak Nako', 'Kaan Okan', 'Top', 'Team Vitality'),"
-    + "('Lyncas', 'Linas Nauncikas', 'Jungle', 'Team Vitality'),"
-    + "('Czajek', 'Mateusz Czajka', 'Mid', 'Team Vitality'),"
-    + "('Carzzy', 'Matyáš Orság', 'Adc', 'Team Vitality'),"
-    + "('Hylissang', 'Zdravets Galabov', 'Support', 'Team Vitality')")
+    execute_query(cnx, "INSERT INTO Players(Name, RealName, Role) VALUES "
+    + "('Oscarinin', 'Óscar Muñoz Jiménez', 'Top'),"
+    + "('Razork', 'Iván Martín Díaz', 'Jungle'),"
+    + "('Humanoid', 'Marek Brázda', 'Mid'),"
+    + "('Upset', 'Elias Lipp', 'Adc'),"
+    + "('Mikyx', 'Mihael Mehle', 'Support'),"
+    + "('BrokenBlade', 'Sergen Çelik', 'Top'),"
+    + "('SkewMond', 'Rudy Semaan', 'Jungle'),"
+    + "('Caps', 'Rasmus Winther', 'Mid'),"
+    + "('Hans Sama', 'Steven Liv', 'Adc'),"
+    + "('Labrov', 'Labros Papoutsakis', 'Support'),"
+    + "('Lot', 'Eren Yıldız', 'Top'),"
+    + "('Closer', 'Can Çelik', 'Jungle'),"
+    + "('Jackies', 'Adam Jeřábek', 'Mid'),"
+    + "('Noah', 'Oh Hyeon-taek', 'Adc'),"
+    + "('Jun', 'Yoon Se-jun', 'Support'),"
+    + "('Canna', 'Kim Chang-dong', 'Top'),"
+    + "('Yike', 'Martin Sundelin', 'Jungle'),"
+    + "('Vladi', 'Vladimiros Kourtidis', 'Mid'),"
+    + "('Caliste', 'Caliste Henry-Hennebert', 'Adc'),"
+    + "('Targamas', 'Raphaël Crabbé', 'Support'),"
+    + "('Myrwn', 'Alex Villarejo', 'Top'),"
+    + "('Elyoya', 'Javier Prades Batalla', 'Jungle'),"
+    + "('Jojopyun', 'Joseph Joon Pyun', 'Mid'),"
+    + "('Supa', 'David Martínez García', 'Adc'),"
+    + "('Alvaro', 'Álvaro Fernández del Amo', 'Support'),"
+    + "('Adam', 'Adam Maanane', 'Top'),"
+    + "('Malrang', 'Kim Geun-seong', 'Jungle'),"
+    + "('Larssen', 'Emil Larsson', 'Mid'),"
+    + "('Patrik', 'Patrik Jírů', 'Adc'),"
+    + "('Execute', 'Lee Jeong-hoon', 'Support'),"
+    + "('JNX', 'Janik Bartels', 'Top'),"
+    + "('Isma', 'Ismaïl Boualem', 'Jungle'),"
+    + "('Reeker', 'Steven Chen', 'Mid'),"
+    + "('Rahel', 'Cho Min-seong', 'Adc'),"
+    + "('Loopy', 'Kim Dong-hyeon', 'Support'),"
+    + "('Irrelevant', 'Joel Miro Scharoll', 'Top'),"
+    + "('113', 'Doğukan Balcı', 'Jungle'),"
+    + "('Nuc', 'Ilias Bizriken', 'Mid'),"
+    + "('Ice', 'Yoon Sang-hoon', 'Adc'),"
+    + "('Parus', 'Polat Furkan Çiçek', 'Support'),"
+    + "('Carlsen', 'Carl Ulsted Carlsen', 'Top'),"
+    + "('Sheo', 'Théo Borile', 'Jungle'),"
+    + "('Kamiloo', 'Kamil Haudegond', 'Mid'),"
+    + "('Flakked', 'Victor Lirola Tortosa', 'Adc'),"
+    + "('Stend', 'Paul Lardin', 'Support'),"
+    + "('Naak Nako', 'Kaan Okan', 'Top'),"
+    + "('Lyncas', 'Linas Nauncikas', 'Jungle'),"
+    + "('Czajek', 'Mateusz Czajka', 'Mid'),"
+    + "('Carzzy', 'Matyáš Orság', 'Adc'),"
+    + "('Hylissang', 'Zdravets Galabov', 'Support')")
 
     execute_query(cnx, "INSERT INTO Teams(Name, Coach, Top, Jungle, Mid, ADC, Support) VALUES"
     + "('Fnatic', 'Fabian Lohmann', 'Oscarinin', 'Razork', 'Humanoid', 'Upset', 'Mikyx'),"
@@ -341,19 +340,6 @@ if __name__ == "__main__":
     + "('Team BDS', 'Yanis Kella', 'Irrelevant', '113', 'Nuc', 'Ice', 'Parus'),"
     + "('Team Heretics', 'Victor Machuca Segura', 'Carlsen', 'Sheo', 'Kamiloo', 'Flakked', 'Stend'),"
     + "('Team Vitality', 'James MacCormack', 'Naak Nako', 'Lyncas', 'Czajek', 'Carzzy', 'Hylissang')")
-
-    execute_query(cnx, "ALTER TABLE Players "
-        + "ADD CONSTRAINT fk1 "
-        + "FOREIGN KEY (Team) "
-        + "REFERENCES Teams(Name);")
-
-
-    #Functions and Procedures
-    execute_query(cnx, "CREATE PROCEDURE GetTeamWins () " \
-        "BEGIN SELECT Name AS Team, sum(Matches.WinningTeam = Name) " \
-        "AS Wins, GetTeamWinrate(Name) AS 'Win Rate' FROM Teams INNER " \
-        "JOIN Matches ON Teams.Name = Matches.WinningTeam GROUP BY Name;" \
-        "END")
 
     execute_query(cnx, "" \
         "CREATE PROCEDURE InsertMatch (IN RTeam VARCHAR(50), RTop VARCHAR(50), RJgl VARCHAR(50), " \
@@ -429,7 +415,7 @@ if __name__ == "__main__":
         "SELECT t.Name AS TeamName, " \
         "COUNT(m.MatchID) AS TotalGames, " \
         "SUM(CASE WHEN t.Name = m.WinningTeam THEN 1 ELSE 0 END) AS Wins, " \
-        "ROUND(GetTeamWinrate(t.Name)) AS WinratePercent " \
+        "GetTeamWinrate(t.Name) AS WinratePercent " \
         "FROM Teams t " \
         "LEFT JOIN Matches m ON t.Name = m.RedSideTeam OR t.Name = m.BlueSideTeam " \
         "GROUP BY t.Name;")
@@ -441,14 +427,19 @@ if __name__ == "__main__":
         "GetChampionWinrate(c.Name) AS WinRate " \
         "FROM Champions c " \
         "GROUP BY c.Name;")
-    
+
+    execute_query(cnx, "" \
+        "CREATE VIEW PlayerInfo AS " \
+        "SELECT p.Name, p.RealName AS 'Real Name', p.Role, t.Name AS Team " \
+        "FROM Players p INNER JOIN Teams t ON " \
+        "(p.Name = t.Top OR p.Name = t.Jungle OR p.Name = t.Mid OR p.Name = t.ADC or p.Name = t.Support);")
+
     execute_query(cnx, "" \
         "CREATE VIEW SideStatistics AS " \
         "SELECT " \
         "GetSideWinrate('Red') AS RedSideWinRate, " \
-        "GetSideWinrate('Blue') AS BlueSideWinRate; " \
-        )
-        
+        "GetSideWinrate('Blue') AS BlueSideWinRate; ")
+
     execute_query(cnx, "" \
         "CREATE FUNCTION GetFavouriteChamp (player VARCHAR(50)) " \
         "RETURNS VARCHAR(50) " \

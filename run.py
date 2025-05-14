@@ -97,7 +97,7 @@ if __name__ == "__main__":
     tk.Button(frame, text="Add Match", command=lambda: open_add_match_window()).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Matches", command=lambda: show_table("Matches")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Teams", command=lambda: show_table("Teams")).pack(fill='x', pady=2)
-    tk.Button(frame, text="Show All Players", command=lambda: show_table("Players")).pack(fill='x', pady=2)
+    tk.Button(frame, text="Show All Players", command=lambda: show_table("PlayerInfo")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show All Champions", command=lambda: show_table("Champions")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show Team Statistics", command=lambda: show_table("TeamStatistics")).pack(fill='x', pady=2)
     tk.Button(frame, text="Show Champion Statistics", command=lambda: show_table("ChampionStatistics")).pack(fill='x', pady=2)
