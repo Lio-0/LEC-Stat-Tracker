@@ -70,7 +70,7 @@ BEGIN
 	SELECT Team FROM Players WHERE (player = Players.Name) INTO pteam;
     SELECT Role FROM Players WHERE (player = Players.Name) INTO prole;
 	
-    IF (prole LIKE "Top") THEN
+    IF (prole LIKE 'Top') THEN
 		SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM 
 		(SELECT Matches.RedSideTop AS Name FROM Matches 
 		WHERE Matches.RedSideTeam = pteam UNION ALL 
@@ -78,7 +78,7 @@ BEGIN
 		WHERE Matches.BlueSideTeam = pteam) AS champs1 GROUP BY Name
 		ORDER BY count DESC LIMIT 1) AS TOP INTO favourite;
 	END IF;
-    IF (prole LIKE "Jungle") THEN
+    IF (prole LIKE 'Jungle') THEN
 		SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM 
 		(SELECT Matches.RedSideJgl AS Name FROM Matches 
 		WHERE Matches.RedSideTeam = pteam UNION ALL 
@@ -86,7 +86,7 @@ BEGIN
 		WHERE Matches.BlueSideTeam = pteam) AS champs2 GROUP BY Name
 		ORDER BY count DESC LIMIT 1) AS JGL INTO favourite;
 	END IF;
-	IF (prole LIKE "Mid") THEN
+	IF (prole LIKE 'Mid') THEN
 		SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM 
 		(SELECT Matches.RedSideMid AS Name FROM Matches 
 		WHERE Matches.RedSideTeam = pteam UNION ALL 
@@ -94,7 +94,7 @@ BEGIN
 		WHERE Matches.BlueSideTeam = pteam) AS champs3 GROUP BY Name
 		ORDER BY count DESC LIMIT 1) AS MID INTO favourite;
 	END IF;
-    IF (prole LIKE "Adc") THEN
+    IF (prole LIKE 'Adc') THEN
 		SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM 
 		(SELECT Matches.RedSideAdc AS Name FROM Matches 
 		WHERE Matches.RedSideTeam = pteam UNION ALL 
@@ -102,7 +102,7 @@ BEGIN
 		WHERE Matches.BlueSideTeam = pteam) AS champs4 GROUP BY Name
 		ORDER BY count DESC LIMIT 1) AS ADC INTO favourite;
 	END IF;
-    IF (prole LIKE "Support") THEN
+    IF (prole LIKE 'Support') THEN
 		SELECT Name FROM (SELECT Name, SUM(Name = Name) AS count FROM 
 		(SELECT Matches.RedSideSup AS Name FROM Matches 
 		WHERE Matches.RedSideTeam = pteam UNION ALL 

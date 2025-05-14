@@ -4,6 +4,10 @@ import mysql.connector
 from mysql.connector import errorcode
 from mysql.connector import Error
 
+USER = "root"
+PASS = ""
+HOST = "localhost"
+
 def execute_query(connection, query):
     """Executes string as MySQL query"""
     cursor = connection.cursor()
@@ -18,14 +22,14 @@ def create_connection(connect_db):
     """Creates a connection to a MySQL instance and database"""
     try:
         if connect_db:
-            connection = mysql.connector.connect(user='root',
-                                                 password='tintin2014',
-                                                 host='localhost',
+            connection = mysql.connector.connect(user=USER,
+                                                 password=PASS,
+                                                 host=HOST,
                                                  database="LEC_STATS")
         else:
-            connection = mysql.connector.connect(user='root',
-                                                 password='tintin2014',
-                                                 host='localhost')
+            connection = mysql.connector.connect(user=USER,
+                                                 password=PASS,
+                                                 host=HOST)
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
             print("Something is wrong with your user name or password")
